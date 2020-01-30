@@ -42,6 +42,7 @@ break
  
  Create Module 2:- Create A Container Instances:-
  
+ 
  ```
  $rg = "ODL-validation-143815" 
 Get-AzureRmContainerGroup 
@@ -78,7 +79,11 @@ else
 ```
 
 
+
+
 Create 3:- Create a Vnet witn two virtual Machines:-
+
+
 
 ```
 $rg = "ODL-validation-143815" 
@@ -116,10 +121,13 @@ $vms.Count -eq 2)
         } 
     } 
 } 
+
 ```
 
 
 Create a blob storage:-
+
+
 
 ```
 $rg = "ODL-validation-143815" 
@@ -158,6 +166,8 @@ $storage = Get-AzureRmStorageAccount  -ResourceGroupName $rg if ($storage.Count 
 
 Create a SQL Database:-
 
+
+
 ```
 $rg = "ODL-validation-143815" 
 Get-AzureRmSqlServer 
@@ -195,9 +205,12 @@ if ($SQLDB.Count -eq 0)
     } 
 }  
    
+   
 ```
 
+
 Create a IotHub:-
+
 
 ```
 $rg = "ODL-validation-143815" 
@@ -235,7 +248,9 @@ if ($iot.Count -eq 0)
 ```
 
 
+
 Create a webapp:-
+
 
 ```
 $rg = "ODL-validation-143183" 
@@ -271,7 +286,9 @@ if ($webapp.Count -eq 0)
 } 
 ``` 
 
+
 Secure Network Traffic:-
+
 
 ```
            
@@ -314,7 +331,10 @@ else
 ```
 
 
+
 Create a key vault:-
+
+
 
 ```
 $rg = "ODL-validation-143183" 
@@ -351,10 +371,14 @@ $secretname = $secret.Name
        $message 
         } 
     } 
-} ```
+} 
+```
  
 
 Create a allowed policy:-
+
+
+
 ```
 $rg = "ODL-validation-143183" 
   
@@ -392,6 +416,8 @@ if ($policy.Count -eq 0)
 
 
 Create a ROle:-
+
+
 
 ```
 $rg = "ODL-validation-143183" 
@@ -433,7 +459,10 @@ if ($Role.Count -eq 0)
 
 Create a resource lock:-
 
+
+
 ```
+
 $rg = "ODL-validation-143183" 
 
  
@@ -472,6 +501,9 @@ if ($lock.Count -eq 0)
 ```
 
 Create required tag:- 
+
+
+
 
 ```
 $rg = "ODL-validation-143183" 
