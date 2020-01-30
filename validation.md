@@ -3,9 +3,36 @@ Module 1:- Create a virtual machine
 
 
 ```
-$rg = "ODL-validation-143815"
+ $rg = "ODL-validation-143815"
 
 $vms = Get-AzureRmVM  -ResourceGroupName $rg 
+$ip = Get-AzureRmPublicIpAddress -ResourceGroupName $rg 
+$vmip = $ip.IpAddress
+
+$vm = "$vmip"
+$vmip = "http://$vm"
+
+
+ $_URL = $vmip
+function CheckSiteURLStatus($_URL) {
+try {
+$request= [System.Net.WebRequest]::Create($_URL)
+$response = $request.getResponse()
+if ($response.StatusCode -eq "200") {
+         $message = "Site is Up" 
+          $message
+}
+else {
+write-host "`n Site - $_URL is down `n" ` -ForegroundColor red
+}
+} catch {
+write-host "`n Site is not accessable, May DNS issue. Try again.`n" ` -ForegroundColor red
+}
+}
+ 
+$a = CheckSiteURLStatus $_URL 
+
+
 if ($vms.Count -eq 0) 
 { 
      $message = @{Status ="Failed"; Message = "No VMs found in $rg"}| ConvertTo-Json 
@@ -20,7 +47,7 @@ else
     $vmImageOffer =  $vms.StorageProfile.ImageReference.Offer 
  	 	 	 
  
-        if($vmSize -like "Standard_D2s_v3"-or $vmImageOffer -like "Windows Server 2019 Datacenter" ) 
+        if($vmSize -like "Standard_D2_v3" -and $vmImageOffer -like "WindowsServer" -and $a -eq "Site is up" ) 
         { 
          $message = @{Status ="Succeeded"; Message = "VM found that matches the size Standard_DS2_v3 on Windows Server 2019 Datacenter"}| ConvertTo-Json 
          $message
@@ -35,6 +62,8 @@ break
       } 
     } 
 } 
+
+
  ```
  
  
